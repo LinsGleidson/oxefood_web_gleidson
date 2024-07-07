@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useState }  from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
 
 export default function FormProduto() {
+
+    const [titulo, setTitulo] = useState();
+    const [codProduto, setCodProduto] = useState();
+    const [descricao, setDescricao] = useState();
+    const [valorunitario, setValorUnitario] = useState();
+    const [entregaMinima, setEntregaMinima] = useState();
+    const [entregaMaxima, setEntregaMaxima] = useState();
+
+
+
+    function salvar() {
+
+		let produtoRequest = {
+		     titulo: titulo,
+		     codProduto: codProduto,
+		     descricao: descricao,
+		     valorUnitario: valorunitario,
+		     entregaMinima: entregaMinima,
+             entregaMaxima: entregaMaxima,
+		}
+	
+		axios.post("http://localhost:8082/api/produto", produtoRequest)
+		.then((response) => {
+		     console.log('Produto cadastrado com sucesso.')
+		})
+		.catch((error) => {
+		     console.log('Erro ao incluir o Produto.')
+		})
+	}
+
+
+
 
     return (
 

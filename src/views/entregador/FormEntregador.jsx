@@ -1,10 +1,59 @@
-import React from "react";
+import axios from "axios";
+import React, { useState }  from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon, Select } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
 
 export default function FormEntregador() {
+
+
+    const [nome, setNome] = useState();
+    const [cpf, setCpf] = useState();
+    const [rg, setRg] = useState();
+    const [dataNascimento, setDataNascimento] = useState();
+    const [foneCelular, setFoneCelular] = useState();
+    const [foneFixo, setFoneFixo] = useState();
+    const [qtdEntregasrealizadas, setQtdEntregasrealizadas] = useState();
+    const [valorfrete, setValorfrete] = useState();
+    const [rua, setRua] = useState();
+    const [numero, setNumero] = useState();
+    const [bairro, setBairro] = useState();
+    const [cidade, setCidade] = useState(); 
+    const [cep, setCep] = useState();
+    const [uf, setUf] = useState();
+
+
+
+    function salvar() {
+
+		let entregadorRequest = {
+		     nome: nome,
+		     cpf: cpf,
+             rg: rg,
+		     dataNascimento: dataNascimento,
+		     foneCelular: foneCelular,
+		     foneFixo: foneFixo,
+             qtdEntregasrealizadas: qtdEntregasrealizadas,
+             valorFrete: valorFrete,
+             rua: rua,
+             numero: numero,
+             bairro: bairro,
+             cidade: cidade,
+             cep: cep,
+             uf: uf,
+             
+		}
+	
+		axios.post("http://localhost:8082/api/entregador", entregadorRequest)
+		.then((response) => {
+		     console.log('Entregador cadastrado com sucesso.')
+		})
+		.catch((error) => {
+		     console.log('Erro ao incluir o um Entregador.')
+		})
+	}
+
 
     return (
 
@@ -202,13 +251,6 @@ export default function FormEntregador() {
                             </Form.Group>
 
                             
-
-
-
-
-
-
-
 
                         </Form>
 
